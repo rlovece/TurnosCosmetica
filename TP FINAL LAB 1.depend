@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1654098933 source:c:\users\mpber\onedrive\documentos\utn\programación y laboratorio i\práctica\tp final lab 1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
