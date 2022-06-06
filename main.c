@@ -3,6 +3,8 @@
 #include<string.h>
 #include<conio.h>
 
+const int maxServicios = 15;
+
 typedef struct
 {
     int IdCliente;
@@ -20,6 +22,26 @@ typedef struct
     char Nombre[40];
     int costo;
 } stServicio;
+
+typedef struct
+{
+    int dia;
+    int mes;
+    int anio;
+} stFecha;
+
+typedef struct
+{
+    int IdTurno;
+    stFecha fechaTurno;
+    long int DNICliente;
+    int IdCliente;
+    char descripcion[300]
+    stServicio servicios[maxServicios];
+    int QServicios;
+    int costoTotal;
+    int Anulado;
+} stTutno;
 
 int ContarServicios(char Archivo[]);
 stServicio CargarUnServicio(int id);
@@ -325,4 +347,111 @@ void MostrarClientes(char Archivo[])
 
         fclose(buffer);
     }
+}
+stFecha cargarFecha ()
+{
+    stFecha fecha;
+    printf("dia (xx): ");
+    scanf("%i", fecha.dia);
+    printf("mes (xx): ");
+    scanf("%i", fecha.mes);
+    printf("anio (xx): ");
+    scanf("%i", fecha.anio);
+    return fecha;
+}
+
+stServicio buscarServicioPorID
+
+int cargarArregloServicios (stServicio servicios[])
+{
+    char control = 's';
+    int i=0;
+    stServicio auxServi;
+    while (i<maxServicios && (control=='s' || control=='S'))
+    {
+        printf("\n Ingrese el IDServicio requerido: ");
+        scanf("%i", auxServi.IdServicio);
+
+
+
+
+
+    }
+    return servicio;
+}
+
+stCliente devolverCliente (char Archivo[], long int DNI)
+{
+    int flag=0;
+    stCliente aux;
+    stCliente valido;
+    FILE *buffer= fopen(Archivo, "rb");
+
+    if(buffer == NULL)
+    {
+        printf("\nNo pudo abrirse el archivo");
+    }
+    else
+    {
+        while((fread(&aux, sizeof(stCliente), 1, buffer) > 0)&& flag==0)
+        {
+            if(DNI == aux.DNI)
+            {
+                valido=aux;
+                flag=1;
+            }
+        }
+
+    fclose(buffer);
+    }
+    return valido;
+}
+
+void cargarUnTurno (char archivoTurno[], char archivoCliente[])
+{
+    stTutno turno;
+    int QArchi;
+    stCliente auxCte;
+    stFecha auxFecha;
+    FILE*bufferTurno = fopen(nombreA, "r+b");
+    if  (bufferTurno==NULL)
+    {
+        printf("El archivo no pudo abrirse");
+    }
+    else
+    {
+        fseek(buffer,0,2);
+        QArchi = ftell(buffer)/sizeof(stTutno);
+        turno.IdTurno = QArchi + 1;
+        printf("\n Ingrese el DNI del Cliente: ");
+        scanf("%i", &turno.DNICliente);
+        FILE*bufferCliente=fopen(nombreArchiCliente, "rb"); /// Se carga el IDCte sin pedirlo al USU.
+        if (bufferCliente==NULL)
+        {
+            printf("El archivo de clientes no pudo abrirse");
+        }
+        else
+        {
+            turno.IdCliente=0;
+            while (fread((&auxCte),sizeof(stCliente),1,bufferCliente)>0 && turno.IdCliente==0)
+            {
+                if (auxCte.DNI==turno.DNICliente)
+                {
+                    turno.IdCliente=auxCte.IdCliente;
+                }
+            }
+            fclose(bufferCliente);
+        }
+        if (turno.IdCliente!=0)
+        {
+            turno.fechaTurno = cargarFecha();
+            MostrarServicios(archivoServicios);
+
+        }
+
+
+        fclose(bufferTurno);
+    }
+
+
 }
